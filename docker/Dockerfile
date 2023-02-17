@@ -1,21 +1,21 @@
-FROM fluent/fluentd:v1.2-debian
+FROM fluent/fluentd:v1.14-debian-1
 
 USER root
 WORKDIR /home/fluent
-ENV PATH /home/fluent/.gem/ruby/2.3.0/bin:$PATH
+ENV PATH /home/fluent/.gem/ruby/2.7.0/bin:$PATH
 ENV BUILDDEPS="sudo make gcc g++ libc-dev ruby-dev libffi-dev"
 
 RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends $BUILDDEPS \ 
     && echo 'gem: --no-document' >> /etc/gemrc \
-    && gem install fluent-plugin-systemd -v 0.3.1 \
-    && gem install fluent-plugin-papertrail -v 0.2.7 \
-    && gem install fluent-plugin-loggly-syslog -v 0.0.5 \
-    && gem install fluent-plugin-rewrite-tag-filter -v 2.0.2 \
-    && gem install fluent-plugin-kubernetes_metadata_input -v 0.21.11 \
-    && gem install fluent-plugin-kubernetes_metadata_filter -v 2.1.2 \
-    && gem install fluent-plugin-detect-exceptions -v 0.0.11 \
+    && gem install fluent-plugin-systemd \
+    && gem install fluent-plugin-papertrail \
+    && gem install fluent-plugin-loggly-syslog \
+    && gem install fluent-plugin-rewrite-tag-filter \
+    && gem install fluent-plugin-kubernetes_metadata_input \
+    && gem install fluent-plugin-kubernetes_metadata_filter \
+    && gem install fluent-plugin-detect-exceptions \
     && SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
                   $BUILDDEPS \
