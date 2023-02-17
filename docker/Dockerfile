@@ -25,8 +25,7 @@ ENV BUILDDEPS="sudo make gcc g++ libc-dev ruby-dev libffi-dev"
 RUN set -eux; \
     apk add --no-cache --virtual .build-deps \
             build-base linux-headers ruby-dev; \
-    gem install fluent-plugin-systemd \
-                fluent-plugin-papertrail \
+    gem install fluent-plugin-papertrail \
                 fluent-plugin-loggly-syslog \
                 fluent-plugin-rewrite-tag-filter \
                 fluent-plugin-kubernetes_metadata_input \
